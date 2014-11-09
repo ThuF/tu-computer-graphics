@@ -21,7 +21,7 @@ public class DrawingRenderer extends AbstractRenderer {
 
 	private float angle = 0;
 
-	private int width = 0;
+	private int lineWidth = 0;
 
 	private float translateX = 0;
 	private float translateY = 0;
@@ -59,7 +59,7 @@ public class DrawingRenderer extends AbstractRenderer {
 	}
 
 	private void drawLines(GL2 gl) {
-		gl.glLineWidth(width);
+		gl.glLineWidth(lineWidth);
 		gl.glBegin(GL.GL_LINES);
 
 		gl.glVertex2d(startX, startY);
@@ -70,7 +70,7 @@ public class DrawingRenderer extends AbstractRenderer {
 
 	void drawPolygons(GL2 gl, int sides) {
 		if (sides >= 3) {
-			gl.glLineWidth(width);
+			gl.glLineWidth(lineWidth);
 			gl.glBegin(GL2.GL_LINES);
 			double step = (2 * Math.PI) / (double) sides;
 			double xFactor = getXFactor();
@@ -97,11 +97,11 @@ public class DrawingRenderer extends AbstractRenderer {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyChar()) {
 		case '+':
-			width++;
+			lineWidth++;
 			break;
 		case '-':
-			if (width > 0) {
-				width--;
+			if (lineWidth > 0) {
+				lineWidth--;
 			}
 			break;
 		case 'w':
@@ -166,14 +166,6 @@ public class DrawingRenderer extends AbstractRenderer {
 		generateRandomColor();
 	}
 
-	private double getXPosition(MouseEvent e) {
-		return (e.getX() - 250) / 250.0;
-	}
-
-	private double getYPosition(MouseEvent e) {
-		return (250 - e.getY()) / 250.0;
-	}
-
 	private void resetDrawingProperties() {
 		angle = 0;
 		translateX = 0;
@@ -186,5 +178,4 @@ public class DrawingRenderer extends AbstractRenderer {
 		green = RANDOM.nextFloat();
 		blue = RANDOM.nextFloat();
 	}
-
 }
